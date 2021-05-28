@@ -1,11 +1,17 @@
 package de.netempire.movie_library.actor;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.sun.istack.NotNull;
 import de.netempire.movie_library.movie.Movie;
 
 import javax.persistence.*;
 import java.util.Set;
 
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 @Entity
 public class Actor {
 
@@ -15,7 +21,7 @@ public class Actor {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
             name = "actor_in_movie",
             joinColumns = @JoinColumn(name = "actor_id"),

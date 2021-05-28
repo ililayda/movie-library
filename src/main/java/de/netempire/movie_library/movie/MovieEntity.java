@@ -1,21 +1,15 @@
 package de.netempire.movie_library.movie;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.sun.istack.NotNull;
 import de.netempire.movie_library.actor.Actor;
 
 import javax.persistence.*;
 import java.util.Set;
 
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
 @Entity
-public class Movie {
+public class MovieEntity {
 
-    public Movie() {
+    public MovieEntity() {
     }
 
     @Id
@@ -70,6 +64,14 @@ public class Movie {
         this.category = category;
     }
 
+    public String getPlot() {
+        return plot;
+    }
+
+    public void setPlot(String plot) {
+        this.plot = plot;
+    }
+
     public String getReleaseDate() {
         return releaseDate;
     }
@@ -85,13 +87,4 @@ public class Movie {
     public void setRating(String rating) {
         this.rating = rating;
     }
-
-    public String getPlot() {
-        return plot;
-    }
-
-    public void setPlot(String plot) {
-        this.plot = plot;
-    }
-
 }

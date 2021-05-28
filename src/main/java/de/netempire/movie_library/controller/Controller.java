@@ -6,10 +6,9 @@ import de.netempire.movie_library.jpa.CategoryRepository;
 import de.netempire.movie_library.movie.Movie;
 import de.netempire.movie_library.jpa.ActorRepository;
 import de.netempire.movie_library.jpa.MovieRepository;
+import de.netempire.movie_library.movie.MovieEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.sql.*;
 
 @RestController
 public class Controller {
@@ -24,9 +23,18 @@ public class Controller {
     CategoryRepository categoryRepository;
 
     @GetMapping(value = "/movie", produces = {"application/json"})
-    public @ResponseBody Iterable<Movie> getAllFilm() {
+    public @ResponseBody Movie getAllFilm() {
 
-        return movieRepository.findAll();
+        MovieEntity entity = new MovieEntity();
+        Movie movie = new Movie();
+        movie.setId(entity.getId());
+        movie.setTitle(entity.getTitle());
+        movie.setCategory(entity.getCategory());
+        movie.setPlot(entity.getPlot());
+        movie.setRating(entity.getRating());
+        movie.setHasIn(entity.getHasIn());
+
+        return movie;
     }
 
     @GetMapping(value = "/actor", produces = {"application/json"})
