@@ -23,7 +23,7 @@ public class Controller {
     CategoryRepository categoryRepository;
 
     @GetMapping(value = "/movie", produces = {"application/json"})
-    public @ResponseBody Movie getAllFilm() {
+    public @ResponseBody Movie getAllMovies() {
 
         MovieEntity entity = new MovieEntity();
         Movie movie = new Movie();

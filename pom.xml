@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>de.netempire</groupId>
-	<artifactId>film-library</artifactId>
+	<artifactId>movie-library</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>film-library</name>
 	<description>Azubis 102</description>
