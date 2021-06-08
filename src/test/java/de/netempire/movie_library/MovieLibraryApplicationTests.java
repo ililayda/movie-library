@@ -1,10 +1,10 @@
-package de.netempire.filmlibrary;
+package de.netempire.movie_library;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class FilmLibraryApplicationTests {
+class MovieLibraryApplicationTests {
 
 	@Test
 	void contextLoads() {

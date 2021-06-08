@@ -27,6 +27,8 @@ public class Controller {
 
         MovieEntity entity = new MovieEntity();
         Movie movie = new Movie();
+
+        // MovieEntity = movieRepository.findAll();
         movie.setId(entity.getId());
         movie.setTitle(entity.getTitle());
         movie.setCategory(entity.getCategory());
