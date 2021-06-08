@@ -22,6 +22,7 @@ public class Controller {
     @Autowired
     CategoryRepository categoryRepository;
 
+
     @GetMapping(value = "/movie", produces = {"application/json"})
     public @ResponseBody Movie getAllMovies() {
 

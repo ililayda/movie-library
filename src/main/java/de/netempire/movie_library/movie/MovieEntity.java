@@ -12,6 +12,7 @@ public class MovieEntity {
     public MovieEntity() {
     }
 
+
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
@@ -31,6 +32,7 @@ public class MovieEntity {
     private String releaseDate;
     @NotNull
     private String rating;
+
 
     public Long getId() {
         return id;

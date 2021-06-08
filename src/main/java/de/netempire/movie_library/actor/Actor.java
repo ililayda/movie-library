@@ -18,6 +18,7 @@ public class Actor {
     public Actor() {
     }
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -33,6 +34,7 @@ public class Actor {
     private String lastname;
     @NotNull
     private String dateOfBirth;
+
 
     public Long getId() {
         return id;

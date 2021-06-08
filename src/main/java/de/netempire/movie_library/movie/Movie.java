@@ -18,6 +18,7 @@ public class Movie {
     public Movie() {
     }
 
+
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
@@ -37,6 +38,7 @@ public class Movie {
     private String releaseDate;
     @NotNull
     private String rating;
+
 
     public Long getId() {
         return id;
