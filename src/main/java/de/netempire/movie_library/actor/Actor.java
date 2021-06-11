@@ -35,6 +35,29 @@ public class Actor {
     @NotNull
     private String dateOfBirth;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Actor actor = (Actor) o;
+
+        if (id != null ? !id.equals(actor.id) : actor.id != null) return false;
+        if (playsIn != null ? !playsIn.equals(actor.playsIn) : actor.playsIn != null) return false;
+        if (firstname != null ? !firstname.equals(actor.firstname) : actor.firstname != null) return false;
+        if (lastname != null ? !lastname.equals(actor.lastname) : actor.lastname != null) return false;
+        return dateOfBirth != null ? dateOfBirth.equals(actor.dateOfBirth) : actor.dateOfBirth == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (playsIn != null ? playsIn.hashCode() : 0);
+        result = 31 * result + (firstname != null ? firstname.hashCode() : 0);
+        result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
+        result = 31 * result + (dateOfBirth != null ? dateOfBirth.hashCode() : 0);
+        return result;
+    }
 
     public Long getId() {
         return id;
