@@ -1,8 +1,6 @@
 package de.netempire.movie_library.jpa;
 
-import de.netempire.movie_library.actor.Actor;
 import de.netempire.movie_library.category.Category;
-import de.netempire.movie_library.movie.Movie;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

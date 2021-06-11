@@ -27,7 +27,6 @@ class MovieRepositoryTest {
         movie.setCategory("2");
         movie.setTitle("Hans ImGlück");
         movie.setReleaseDate("Glücksdatum");
-        movie.getHasIn();
         movieRepository.save(movie);
     }
 

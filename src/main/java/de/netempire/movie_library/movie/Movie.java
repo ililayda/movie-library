@@ -1,7 +1,6 @@
 package de.netempire.movie_library.movie;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.sun.istack.NotNull;
 import de.netempire.movie_library.actor.Actor;
@@ -20,7 +19,7 @@ public class Movie {
 
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @NotNull
     private String title;
