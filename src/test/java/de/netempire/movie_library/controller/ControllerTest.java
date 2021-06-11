@@ -27,7 +27,6 @@ class ControllerTest {
         movie.setCategory(entity.getCategory());
         movie.setPlot(entity.getPlot());
         movie.setRating(entity.getRating());
-        movie.setHasIn(entity.getHasIn());
 
         return movie;
     }

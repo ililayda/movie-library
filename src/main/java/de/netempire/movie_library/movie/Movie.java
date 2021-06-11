@@ -23,12 +23,12 @@ public class Movie {
     private Long id;
     @NotNull
     private String title;
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "actor_in_movie",
-            joinColumns = @JoinColumn(name = "movie_id"),
-            inverseJoinColumns = @JoinColumn(name = "actor_id"))
-    Set<Actor> hasIn;
+    // @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    // @JoinTable(
+    //         name = "actor_in_movie",
+    //         joinColumns = @JoinColumn(name = "movie_id"),
+    //         inverseJoinColumns = @JoinColumn(name = "actor_id"))
+    // Set<Actor> hasIn;
     @NotNull
     private String category;
     @NotNull
@@ -53,14 +53,6 @@ public class Movie {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public Set<Actor> getHasIn() {
-        return hasIn;
-    }
-
-    public void setHasIn(Set<Actor> hasIn) {
-        this.hasIn = hasIn;
     }
 
     public String getCategory() {

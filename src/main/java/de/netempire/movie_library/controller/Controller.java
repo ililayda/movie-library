@@ -10,6 +10,8 @@ import de.netempire.movie_library.movie.MovieEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class Controller {
 
@@ -26,16 +28,22 @@ public class Controller {
     @GetMapping(value = "/movie", produces = {"application/json"})
     public @ResponseBody Movie getAllMovies() {
 
-        MovieEntity entity = new MovieEntity();
         Movie movie = new Movie();
 
-        // MovieEntity = movieRepository.findAll();
-        movie.setId(entity.getId());
-        movie.setTitle(entity.getTitle());
-        movie.setCategory(entity.getCategory());
-        movie.setPlot(entity.getPlot());
-        movie.setRating(entity.getRating());
-        movie.setHasIn(entity.getHasIn());
+        List<Movie> movieList = movieRepository.findAll();
+
+        for (Movie value : movieList) {
+
+            movie.setId(value.getId());
+            movie.setTitle(value.getTitle());
+            movie.setCategory(value.getCategory());
+            movie.setPlot(value.getPlot());
+            movie.setRating(value.getRating());
+
+            System.out.println("Movie: " + movie + ", " + System.lineSeparator());
+
+            return movie;
+        }
 
         return movie;
     }
@@ -46,15 +54,8 @@ public class Controller {
         return actorRepository.findAll();
     }
 
-    @GetMapping(value = "/category", produces = {"application/json"})
-    public @ResponseBody Iterable<Category> getAllCategory() {
-
-        return categoryRepository.findAll();
-    }
-
     /*@GetMapping(value = "/actor_in_movie", produces = {"application/json"})
     public @ResponseBody Movie getAllActorsInMovie(@RequestParam String title) throws SQLException {
-
 
         if (title.contains("_")) {
             title = title.replaceAll("_", " ");
@@ -66,7 +67,6 @@ public class Controller {
         long movieID = movie.getId();
 
 
-
         long actorID = 1;
 
         Actor actor = actorRepository.findByID(actorID);
@@ -74,6 +74,32 @@ public class Controller {
 
         return movie;
     } */
+
+    @GetMapping(value = "/insertMovie", produces = {"application/json"})
+    public @ResponseBody Movie insertMovie() {
+
+        Movie movie = new Movie();
+        movie.setRating("10/10");
+        movie.setPlot("Hans im Glück remastered");
+        movie.setCategory("2");
+        movie.setTitle("Hans ImGlück");
+        movie.setReleaseDate("Glücksdatum");
+        movieRepository.save(movie);
+
+        return movie;
+    }
+
+    @GetMapping(value = "/insertActor", produces = {"application/json"})
+    public @ResponseBody Actor insertActor() {
+
+        Actor actor = new Actor();
+        actor.setFirstname("Hans");
+        actor.setLastname("Imglück");
+        actor.setDateOfBirth("01.01.1970");
+        actorRepository.save(actor);
+
+        return actor;
+    }
 
 
     public String getUser() {
