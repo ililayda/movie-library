@@ -25,7 +25,7 @@ class MovieRepositoryTest {
         movie.setRating("10/10");
         movie.setPlot("Hans im Glück remastered");
         movie.setCategory("2");
-        movie.setTitle("Hans ImGlück");
+        movie.setTitle("Hans Im_Glück");
         movie.setReleaseDate("Glücksdatum");
         movieRepository.save(movie);
     }
