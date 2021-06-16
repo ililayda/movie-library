@@ -1,12 +1,10 @@
 package de.netempire.movie_library.controller;
 
 import de.netempire.movie_library.actor.Actor;
-import de.netempire.movie_library.category.Category;
 import de.netempire.movie_library.jpa.CategoryRepository;
 import de.netempire.movie_library.movie.Movie;
 import de.netempire.movie_library.jpa.ActorRepository;
 import de.netempire.movie_library.jpa.MovieRepository;
-import de.netempire.movie_library.movie.MovieEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -75,47 +73,31 @@ public class Controller {
         return movie;
     } */
 
-    @GetMapping(value = "/insertMovie", produces = {"application/json"})
-    public @ResponseBody Movie insertMovie() {
+    @PutMapping(value = "/insertMovie/{rating}/{plot}/{category}/{title}/{releaseDate}", produces = {"application/json"})
+    public @ResponseBody Movie insertMovie(@PathVariable String rating, @PathVariable String plot, @PathVariable String category,
+                                           @PathVariable String title, @PathVariable String releaseDate) {
 
         Movie movie = new Movie();
-        movie.setRating("10/10");
-        movie.setPlot("Hans im Glück remastered");
-        movie.setCategory("2");
-        movie.setTitle("Hans Im_Glück");
-        movie.setReleaseDate("Glücksdatum");
+        movie.setRating(rating);
+        movie.setPlot(plot);
+        movie.setCategory(category);
+        movie.setTitle(title);
+        movie.setReleaseDate(releaseDate);
         movieRepository.save(movie);
 
         return movie;
     }
 
-    @GetMapping(value = "/insertActor", produces = {"application/json"})
-    public @ResponseBody Actor insertActor() {
+    @PostMapping(value = "/insertActor", produces = {"application/json"})
+    public @ResponseBody Actor insertActor(@PathVariable String firstname, @PathVariable String lastname, @PathVariable String dateOfBirth) {
 
         Actor actor = new Actor();
-        actor.setFirstname("Hans");
-        actor.setLastname("Imglück");
-        actor.setDateOfBirth("01.01.1970");
+        actor.setFirstname(firstname);
+        actor.setLastname(lastname);
+        actor.setDateOfBirth(dateOfBirth);
         actorRepository.save(actor);
 
         return actor;
-    }
-
-
-    public String getUser() {
-        return "root";
-    }
-
-    public String getPassword() {
-        return "";
-    }
-
-    public String getDb() {
-        return "film_library";
-    }
-
-    public String getUrl() {
-        return "jdbc:mysql://localhost:3306/";
     }
 
 }
