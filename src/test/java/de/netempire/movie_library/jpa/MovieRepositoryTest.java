@@ -39,7 +39,7 @@ class MovieRepositoryTest {
     @Test
     void findByTitle() {
 
-        Movie myMovie = movieRepository.findByTitle("Hans ImGlück");
+        Movie myMovie = movieRepository.findByTitle("Hans Im_Glück");
 
         assertNotNull(myMovie);
         assertEquals(movie.getId(), myMovie.getId());

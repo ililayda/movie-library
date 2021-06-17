@@ -6,6 +6,7 @@ import de.netempire.movie_library.movie.Movie;
 import de.netempire.movie_library.jpa.ActorRepository;
 import de.netempire.movie_library.jpa.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -52,26 +53,30 @@ public class Controller {
         return actorRepository.findAll();
     }
 
-    /*@GetMapping(value = "/actor_in_movie", produces = {"application/json"})
-    public @ResponseBody Movie getAllActorsInMovie(@RequestParam String title) throws SQLException {
+    // title -> id -> actor_in_movie.actor_id -> actor.id -> Ausgabe Actor/s
+    @GetMapping(value = "/actor_in_movie", produces = {"application/json"})
+    public @ResponseBody List<Actor> getAllActorsInMovie(@RequestParam String title) {
+
+        List<Actor> actorList = null;
 
         if (title.contains("_")) {
             title = title.replaceAll("_", " ");
         }
 
-        // title -> id -> actor_in_movie.actor_id -> actor.id -> Ausgabe Actor/s
-
         Movie movie = movieRepository.findByTitle(title);
         long movieID = movie.getId();
 
+        long i = 1;
+        Actor actor = new Actor();
+        try {
+            actorList.add(actor);
 
-        long actorID = 1;
+        } catch (NullPointerException e) {
+            System.out.println("Error" + e);
+        }
 
-        Actor actor = actorRepository.findByID(actorID);
-
-
-        return movie;
-    } */
+        return actorList;
+    }
 
     @PutMapping(value = "/insertMovie/{rating}/{plot}/{category}/{title}/{releaseDate}", produces = {"application/json"})
     public @ResponseBody Movie insertMovie(@PathVariable String rating, @PathVariable String plot, @PathVariable String category,
@@ -88,6 +93,22 @@ public class Controller {
         return movie;
     }
 
+    @PutMapping(value = "/insertMovie", produces = {"application/json"})
+    public ResponseEntity<Movie> insertMovieObject(@PathVariable Movie movie) {
+
+        movieRepository.save(movie);
+
+        return null;
+
+        //{
+        //"rating": "5/10",
+        //"plot": "cool",
+        //"releaseDate": "16.10.1997",
+        //"title": "Cööl",
+        //"category": "2"
+        //}
+    }
+
     @PostMapping(value = "/insertActor", produces = {"application/json"})
     public @ResponseBody Actor insertActor(@PathVariable String firstname, @PathVariable String lastname, @PathVariable String dateOfBirth) {
 
@@ -98,6 +119,13 @@ public class Controller {
         actorRepository.save(actor);
 
         return actor;
+
+        //{
+        //"firstname": "Gareth",
+        //"lastname": "Wylie",
+        //"dateOfBirth": "2000"
+        //}
+
     }
 
 }
