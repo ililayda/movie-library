@@ -1,7 +1,6 @@
 package de.netempire.movie_library.controller;
 
 import de.netempire.movie_library.actor.Actor;
-import de.netempire.movie_library.jpa.CategoryRepository;
 import de.netempire.movie_library.movie.Movie;
 import de.netempire.movie_library.jpa.ActorRepository;
 import de.netempire.movie_library.jpa.MovieRepository;
@@ -19,10 +18,6 @@ public class Controller {
 
     @Autowired
     ActorRepository actorRepository;
-
-    @Autowired
-    CategoryRepository categoryRepository;
-
 
     @GetMapping(value = "/movie", produces = {"application/json"})
     public @ResponseBody Movie getAllMovies() {
@@ -47,11 +42,29 @@ public class Controller {
         return movie;
     }
 
+    @GetMapping(value = "/findMovieByTitle/{title}")
+    public @ResponseBody List<Movie> findMovieByTitle(@PathVariable String title) {
+
+        List<Movie> movieList = null;
+
+        for(int i = 0; i <= movieRepository.count(); i++) {
+
+            if (movieRepository.findAllById(i).getTitle().contains(title)) {
+
+                assert false;
+                movieList.add(movieRepository.findAllById(i));
+            }
+        }
+        return movieList;
+    }
+
+
     @GetMapping(value = "/actor", produces = {"application/json"})
     public @ResponseBody Iterable<Actor> getAllActor() {
 
         return actorRepository.findAll();
     }
+
 
     // title -> id -> actor_in_movie.actor_id -> actor.id -> Ausgabe Actor/s
     @GetMapping(value = "/actor_in_movie", produces = {"application/json"})
@@ -69,6 +82,7 @@ public class Controller {
         long i = 1;
         Actor actor = new Actor();
         try {
+            assert false;
             actorList.add(actor);
 
         } catch (NullPointerException e) {
@@ -79,8 +93,9 @@ public class Controller {
     }
 
     @PutMapping(value = "/insertMovie/{rating}/{plot}/{category}/{title}/{releaseDate}", produces = {"application/json"})
-    public @ResponseBody Movie insertMovie(@PathVariable String rating, @PathVariable String plot, @PathVariable String category,
-                                           @PathVariable String title, @PathVariable String releaseDate) {
+    public @ResponseBody Movie insertMovie(@PathVariable String rating, @PathVariable String plot,
+                                           @PathVariable String category, @PathVariable String title,
+                                           @PathVariable String releaseDate) {
 
         Movie movie = new Movie();
         movie.setRating(rating);
@@ -110,7 +125,8 @@ public class Controller {
     }
 
     @PostMapping(value = "/insertActor", produces = {"application/json"})
-    public @ResponseBody Actor insertActor(@PathVariable String firstname, @PathVariable String lastname, @PathVariable String dateOfBirth) {
+    public @ResponseBody Actor insertActor(@PathVariable String firstname, @PathVariable String lastname,
+                                           @PathVariable String dateOfBirth) {
 
         Actor actor = new Actor();
         actor.setFirstname(firstname);
@@ -125,7 +141,6 @@ public class Controller {
         //"lastname": "Wylie",
         //"dateOfBirth": "2000"
         //}
-
     }
 
 }
