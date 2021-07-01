@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.*;
 
 @RestController
 public class Controller {
@@ -18,6 +18,7 @@ public class Controller {
 
     @Autowired
     ActorRepository actorRepository;
+
 
     @GetMapping(value = "/movie", produces = {"application/json"})
     public @ResponseBody Movie getAllMovies() {
@@ -42,20 +43,23 @@ public class Controller {
         return movie;
     }
 
+
     @GetMapping(value = "/findMovieByTitle/{title}")
     public @ResponseBody List<Movie> findMovieByTitle(@PathVariable String title) {
 
-        List<Movie> movieList = null;
+        List<Movie> movieListOut = new ArrayList<>();
+        List<Movie> movieList = movieRepository.findAll();
+        int l = (int) movieRepository.count();
 
-        for(int i = 0; i <= movieRepository.count(); i++) {
+        for (int i = 0; i < l; i++) {
 
-            if (movieRepository.findAllById(i).getTitle().contains(title)) {
+                if (movieList.get(i).getTitle().contains(title)) {
 
-                assert false;
-                movieList.add(movieRepository.findAllById(i));
-            }
+                    assert false;
+                    movieListOut.add(movieList.get(i));
+                }
         }
-        return movieList;
+        return movieListOut;
     }
 
 
@@ -92,6 +96,7 @@ public class Controller {
         return actorList;
     }
 
+
     @PutMapping(value = "/insertMovie/{rating}/{plot}/{category}/{title}/{releaseDate}", produces = {"application/json"})
     public @ResponseBody Movie insertMovie(@PathVariable String rating, @PathVariable String plot,
                                            @PathVariable String category, @PathVariable String title,
@@ -108,6 +113,7 @@ public class Controller {
         return movie;
     }
 
+
     @PutMapping(value = "/insertMovie", produces = {"application/json"})
     public ResponseEntity<Movie> insertMovieObject(@PathVariable Movie movie) {
 
@@ -123,6 +129,7 @@ public class Controller {
         //"category": "2"
         //}
     }
+
 
     @PostMapping(value = "/insertActor", produces = {"application/json"})
     public @ResponseBody Actor insertActor(@PathVariable String firstname, @PathVariable String lastname,
