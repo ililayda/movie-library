@@ -20,7 +20,7 @@ public class Controller {
     ActorRepository actorRepository;
 
 
-    @GetMapping(value = "/movie", produces = {"application/json"})
+    @GetMapping(value = "/movie")
     public @ResponseBody Movie getAllMovies() {
 
         Movie movie = new Movie();
@@ -71,8 +71,8 @@ public class Controller {
 
 
     // title -> id -> actor_in_movie.actor_id -> actor.id -> Ausgabe Actor/s
-    @GetMapping(value = "/actor_in_movie", produces = {"application/json"})
-    public @ResponseBody List<Actor> getAllActorsInMovie(@RequestParam String title) {
+    @GetMapping(value = "/actor_in_movie/{title}")
+    public @ResponseBody List<Actor> getAllActorsInMovie(@PathVariable String title) {
 
         List<Actor> actorList = null;
 
@@ -85,19 +85,15 @@ public class Controller {
 
         long i = 1;
         Actor actor = new Actor();
-        try {
-            assert false;
-            actorList.add(actor);
 
-        } catch (NullPointerException e) {
-            System.out.println("Error" + e);
-        }
+        assert false;
+        actorList.add(actor);
 
         return actorList;
     }
 
 
-    @PutMapping(value = "/insertMovie/{rating}/{plot}/{category}/{title}/{releaseDate}", produces = {"application/json"})
+    @PutMapping(value = "/insertMovie/{rating}/{plot}/{category}/{title}/{releaseDate}")
     public @ResponseBody Movie insertMovie(@PathVariable String rating, @PathVariable String plot,
                                            @PathVariable String category, @PathVariable String title,
                                            @PathVariable String releaseDate) {
@@ -132,7 +128,8 @@ public class Controller {
 
 
     @PostMapping(value = "/insertActor", produces = {"application/json"})
-    public @ResponseBody Actor insertActor(@PathVariable String firstname, @PathVariable String lastname,
+    public @ResponseBody Actor insertActor(@PathVariable String firstname,
+                                           @PathVariable String lastname,
                                            @PathVariable String dateOfBirth) {
 
         Actor actor = new Actor();
