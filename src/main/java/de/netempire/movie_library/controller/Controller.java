@@ -48,17 +48,9 @@ public class Controller {
     public @ResponseBody List<Movie> findMovieByTitle(@PathVariable String title) {
 
         List<Movie> movieListOut = new ArrayList<>();
-        List<Movie> movieList = movieRepository.findAll();
-        int l = (int) movieRepository.count();
 
-        for (int i = 0; i < l; i++) {
+        movieListOut.add(movieRepository.findByTitleContaining(title));
 
-                if (movieList.get(i).getTitle().contains(title)) {
-
-                    assert false;
-                    movieListOut.add(movieList.get(i));
-                }
-        }
         return movieListOut;
     }
 

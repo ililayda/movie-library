@@ -6,6 +6,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -39,10 +45,31 @@ class MovieRepositoryTest {
     @Test
     void findByTitle() {
 
-        Movie myMovie = movieRepository.findByTitle("Hans Im_Glück");
+        Movie myMovie = movieRepository.findByTitle("Hans Im_Gl");
 
         assertNotNull(myMovie);
         assertEquals(movie.getId(), myMovie.getId());
 
     }
+
+    @Test
+    void findByTitleLike() {
+
+        Movie myMovie = movieRepository.findByTitleLike("Hans Im_Gl%");
+
+        assertNotNull(myMovie);
+        assertEquals(movie.getId(), myMovie.getId());
+
+    }
+
+    @Test
+    void findByTitleContaining() {
+
+        Movie myMovie = movieRepository.findByTitleContaining("Hans Im_gl");
+
+        assertNotNull(myMovie);
+        assertEquals(movie.getId(), myMovie.getId());
+
+    }
+
 }
